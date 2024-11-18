@@ -4,14 +4,14 @@ import { Typography, Row, Col, Statistic } from 'antd'
 import { Link } from 'react-router-dom'
 import { useGetCryptosQuery } from '../services/cryptoApi'
 import { CryptoCurrencies, News } from '../components'
+import Loader from './Loader'
 
 
 const HomePage = () => {
   const { data: cryptos, isFetching } = useGetCryptosQuery()
   const globalStats = cryptos?.data?.stats
-  console.log(globalStats)
 
-  if (isFetching) return <p>Loading...</p>
+  if (isFetching) return <Loader />;
 
   return (
     <>
@@ -32,7 +32,7 @@ const HomePage = () => {
         <Typography.Title level={2} className='home-title'>Latest Crypto News</Typography.Title>
         <Typography.Title level={3} className='show-more'><Link to='/cryptocurrencies'>Show more</Link></Typography.Title>
       </div>
-      <News />
+      <News simplified/>
     </>
   )
 }
